@@ -66,15 +66,21 @@ let songIndex = 0;
 // previous button: if we decrease the songIndex then we can play the previous song
 function previousSong() {
     songIndex--;
-    console.log(songIndex);
+    if (songIndex<0) {
+        songIndex = songs.length - 1;
+    }
+    // console.log(songIndex);
     loadSongs(songs[songIndex]);
     playSong();
 }
 
 // next button: if we increase the songIndex then we can play the next song
-function previousSong() {
+function nextSong() {
     songIndex++;
-    console.log(songIndex);
+    if (songIndex>songs.length-1) {
+        songIndex = 0;
+    }
+    // console.log(songIndex);
     loadSongs(songs[songIndex]);
     playSong();
 }

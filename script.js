@@ -7,7 +7,7 @@ const playbtn = document.getElementById('play');
 const nextbtn = document.getElementById('next');
 const music = document.querySelector('audio');
 
-// list of songs
+// Songs list array of objects
 const songs = [
     {
         name: 'jacinto-1',

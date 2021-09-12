@@ -100,17 +100,31 @@ function upadteProgressBar(e) {
         // update the progress bar width
         const progressPercent = (currentTime / duration) * 100;
         progress.style.width = `${progressPercent}%`;
-        let currentTimeinSec = currentTime / 60;
+        
+        //calculate duration in seonds and minutes
         let durationinMin = Math.floor(duration / 60);
         let durationinSec = Math.floor(duration % 60);
         if (durationinSec<10) {
             durationinSec = `0${durationinSec}`
         }
-        currentTimeEl.textContent = Math.round(currentTimeinSec);
-        //Delay switching duation element to avoid NaN 
+        //Delay switching duration to the element to avoid NaN 
         if (durationinSec) {
             durationEl.textContent = `${durationinMin}:${durationinSec}`;
         }
+
+        //calculate currenttime in seconds and minute
+        let currentTimeinMin = Math.floor(currentTime / 60);
+        let currentTimeinsec = Math.floor(currentTime % 60);
+        if (currentTimeinsec<10) {
+            currentTimeinsec = `0${currentTimeinsec}`;
+        }
+        
+        //Delay switching duration to the element to avoid NaN
+        if (currentTimeinsec) {
+            currentTimeEl.textContent = `${currentTimeinMin}:${currentTimeinsec}`;    
+        }
+        
+
     } 
 }
 

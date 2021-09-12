@@ -1,11 +1,12 @@
 const image = document.querySelector('img');
 const title = document.getElementById('title');
 const artist = document.getElementById('artist');
-
 const prevbtn = document.getElementById('prev');
 const playbtn = document.getElementById('play');
 const nextbtn = document.getElementById('next');
 const music = document.querySelector('audio');
+const progressContainer = document.getElementById('progress-container');
+const progress = document.getElementById('progress');
 
 // Songs list array of objects
 const songs = [
@@ -88,8 +89,20 @@ function nextSong() {
 // onload select first song
 loadSongs(songs[songIndex]);
 
+//Update the progressbar when some thing is playing right
+function upadteProgressBar(e) {
+    if (isPlaying) {
+        // console.log(e);
+        const { duration, currentTime } = e.srcElement;
+        console.log(duration, currentTime);
+        // update the progress bar width
+        const progressPercent = (currentTime / duration) * 100;
+        progress.style.width = `${progressPercent}%`;
+    } 
+}
+
 //Event listeners for prev and next buttons
 prevbtn.addEventListener('click', previousSong);
 nextbtn.addEventListener('click', nextSong);
-
+music.addEventListener('timeupdate', upadteProgressBar);
 

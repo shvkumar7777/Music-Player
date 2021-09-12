@@ -7,6 +7,8 @@ const nextbtn = document.getElementById('next');
 const music = document.querySelector('audio');
 const progressContainer = document.getElementById('progress-container');
 const progress = document.getElementById('progress');
+const currentTimeEl = document.getElementById('current-time');
+const durationEl = document.getElementById('duration');
 
 // Songs list array of objects
 const songs = [
@@ -98,6 +100,17 @@ function upadteProgressBar(e) {
         // update the progress bar width
         const progressPercent = (currentTime / duration) * 100;
         progress.style.width = `${progressPercent}%`;
+        let currentTimeinSec = currentTime / 60;
+        let durationinMin = Math.floor(duration / 60);
+        let durationinSec = Math.floor(duration % 60);
+        if (durationinSec<10) {
+            durationinSec = `0${durationinSec}`
+        }
+        currentTimeEl.textContent = Math.round(currentTimeinSec);
+        //Delay switching duation element to avoid NaN 
+        if (durationinSec) {
+            durationEl.textContent = `${durationinMin}:${durationinSec}`;
+        }
     } 
 }
 

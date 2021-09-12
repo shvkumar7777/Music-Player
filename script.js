@@ -119,17 +119,42 @@ function upadteProgressBar(e) {
             currentTimeinsec = `0${currentTimeinsec}`;
         }
         
-        //Delay switching duration to the element to avoid NaN
+        //Delay switching current time to the element to avoid NaN
         if (currentTimeinsec) {
             currentTimeEl.textContent = `${currentTimeinMin}:${currentTimeinsec}`;    
         }
-        
 
+         //is the song ended? 
+        if (music.ended) {
+            //if yes switch to the next song
+            nextSong()
+        }
     } 
+}
+
+//update the progress bar when clicked on it
+function setProgressBar(e) {
+    console.log(e);
+    const width = e.srcElement.clientWidth;
+    console.log("width"+width);
+    const clickX = e.offsetX;
+    console.log("clickX" + clickX);
+    const { duration } = music;
+    const clickProgress = (clickX / width) * duration;
+    console.log(clickX / width);
+    console.log(clickProgress);
+    music.currentTime = clickProgress;
+} 
+
+function isSongEnded() {
+    
 }
 
 //Event listeners for prev and next buttons
 prevbtn.addEventListener('click', previousSong);
 nextbtn.addEventListener('click', nextSong);
 music.addEventListener('timeupdate', upadteProgressBar);
+// using an ended event to move to the next song 
+// music.addEventListener('ended', nextSong);
+progressContainer.addEventListener('click', setProgressBar);
 
